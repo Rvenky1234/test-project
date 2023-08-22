@@ -28,5 +28,11 @@ pipeline {
            sh 'ng build'
          }
        }
+       stage ('Docker') {
+         steps{
+           echo "Building image"
+            sh 'docker build -t images .'   
+            }
+        }
      }
 }
