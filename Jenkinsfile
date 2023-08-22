@@ -24,7 +24,7 @@ pipeline {
        stage ('Build') {
          steps {
            echo "Starting Build"
-           sh 'npm -i'
+           sh 'npm install'
            sh 'ng build'
          }
        }
