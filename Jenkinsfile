@@ -34,5 +34,14 @@ pipeline {
             sh 'docker build -t images .'   
             }
         }
+       stage('Docker push') {
+      steps {
+        sh'''
+          docker login  --username rvenkat1234 --password Venky@007
+          docker tag images:latest rvenkat1234/test-project:1
+          docker push rvenkat1234/test-project:1
+        '''
+      }
+}
      }
 }
