@@ -11,5 +11,22 @@ pipeline {
                   checkout scm                  
              }
          }
+        stage ('JDK_11') {
+             tools {
+            jdk 'java'
+            }
+             steps{
+               sh '''
+              java -version
+              '''
+            }
+        }
+       stage ('Build') {
+         steps {
+           echo "Starting Build"
+           sh 'npm -i'
+           sh 'ng build'
+         }
+       }
      }
 }
