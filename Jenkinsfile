@@ -31,6 +31,7 @@ pipeline {
        stage ('Docker') {
          steps{
            echo "Building image"
+            sh 'chmod 777 /var/run/docker.sock'
             sh 'docker build -t images .'   
             }
         }
