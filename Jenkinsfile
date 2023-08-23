@@ -43,5 +43,12 @@ pipeline {
         '''
       }
 }
+       stage('K8s deploy') {
+         steps {
+           sh'''
+             kubectl apply -f deployment.yaml
+             '''
+         }
+       }
      }
 }
