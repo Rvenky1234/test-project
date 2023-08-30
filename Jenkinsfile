@@ -17,7 +17,7 @@ pipeline {
                 // Use the SonarQube environment
                 withSonarQubeEnv('sonar_k8s') {
                     // Run the SonarQube scanner
-                    sh 'sonar-scanner'
+                    sh '/usr/local/bin/sonar-scanner'
                 }
              }
          }
