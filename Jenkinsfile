@@ -13,7 +13,6 @@ pipeline {
          }
          stage('SonarQube Analysis') {
             steps {
-                  def scannerHome = tool 'sonar';
                 // Use the SonarQube environment
                 withSonarQubeEnv('sonar_k8s') {
                     // Run the SonarQube scanner
