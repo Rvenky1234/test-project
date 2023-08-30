@@ -11,6 +11,14 @@ pipeline {
                   checkout scm                  
              }
          }
+         stage('SonarQube Analysis') {
+            steps {
+                // Use the SonarQube environment
+                withSonarQubeEnv('sonar_k8s') {
+                    // Run the SonarQube scanner
+                    sh 'sonar-scanner'
+             }
+         }
         stage ('JDK_11') {
              tools {
             jdk 'java'
