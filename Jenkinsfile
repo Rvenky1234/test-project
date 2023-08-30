@@ -17,6 +17,7 @@ pipeline {
                 withSonarQubeEnv('sonar_k8s') {
                     // Run the SonarQube scanner
                     sh 'sonar-scanner'
+                }
              }
          }
         stage ('JDK_11') {
