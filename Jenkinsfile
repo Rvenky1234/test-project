@@ -12,11 +12,17 @@ pipeline {
              }
          }
          stage('SonarQube Analysis') {
+            agent {
+                label 'sonar'
+            } 
             steps {
                 // Use the SonarQube environment
+            script{
+               scannerHome = tool 'sonar-scanner'
+                }
                 withSonarQubeEnv('sonar_k8s') {
                     // Run the SonarQube scanner
-                    sh 'sonar-scanner'
+                    sh '/opt/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=TEST -Dsonar.projectName=TEST -Dsonar.projectVersion=0.1  -Dsonar.sources=src '
                 }
              }
          }
