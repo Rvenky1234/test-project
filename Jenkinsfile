@@ -60,11 +60,25 @@ pipeline {
 }
        stage('K8s deploy') {
          steps {
-           sh'''
-             kubectl apply -f deployment.yaml
-             kubectl apply -f service.yaml 
-             '''
-         }
-       }
+           sh '''#!/bin/bash
+                      service_status=`helm list | grep -i testing | awk \'{print $8}\'`
+                      echo "Service Status is $service_status"
+                    if [ "$service_status" == DEPLOYED ]; then
+                        echo "Service Exist,So upgrade to new version"
+                        echo "helm upgrade testing --recreate-pods  ./testing/"
+                        helm upgrade testing --recreate-pods  ./testing/
+                    elif [ "$service_status" == FAILED ]; then  
+                        echo "Service Initial Deployment failed, So re-install"
+                        helm del --purge testing
+                        helm install --name testing ./testing/
+                    else
+                        echo "Service Not Exist,So first time Deployment"
+                        echo "helm install --name testing ./testing/"
+                        helm install --name testing ./testing/
+                        echo "Image Tag is testing"
+                    fi
+                    '''
+                }
+        }    
      }
 }
