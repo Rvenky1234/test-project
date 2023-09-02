@@ -70,11 +70,11 @@ pipeline {
                     elif [ "$service_status" == FAILED ]; then  
                         echo "Service Initial Deployment failed, So re-install"
                         helm del --purge testing
-                        helm install --name testing ./testing/
+                        helm install testing ./testing/
                     else
                         echo "Service Not Exist,So first time Deployment"
                         echo "helm install --name testing ./testing/"
-                        helm install --name testing ./testing/
+                        helm install testing ./testing/
                         echo "Image Tag is testing"
                     fi
                     '''
