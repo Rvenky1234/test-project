@@ -63,7 +63,7 @@ pipeline {
            sh '''#!/bin/bash
                       service_status=`helm list | grep -i testing | awk \'{print $8}\'`
                       echo "Service Status is $service_status"
-                    if [ "$service_status" == DEPLOYED ]; then
+                    if [ "$service_status" == deployed ]; then
                         echo "Service Exist,So upgrade to new version"
                         echo "helm upgrade testing --recreate-pods  ./testing/"
                         helm upgrade testing --recreate-pods  ./testing/
